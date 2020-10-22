@@ -1,6 +1,6 @@
 # test_app_rf
 
-A new Flutter application.
+This app has only three screens. Authorization is implemented on the phone disk.
 
 ## Getting Started
 
