@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../my_raised_button.dart';
-import '../../size_config.dart';
-import 'package:test_app_rf/text_fild.dart';
+import '../common_widgets/my_raised_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../size_config.dart';
+import '../text_fild.dart';
 import 'notes.dart';
 // import 'notes.dart';
 
