@@ -1,13 +1,42 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:test_app_rf/app/sign_in/sign_in_button.dart';
-import 'package:test_app_rf/app/sign_in/social_sign_in_button.dart';
-import 'package:test_app_rf/custom_widgets/custom_raised_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:test_app_rf/app/sign_in/registration_page.dart';
+import '../../my_raised_button.dart';
+import '../../size_config.dart';
+import '../../text_fild.dart';
+import 'notes.dart';
 
+class SignInPage extends StatefulWidget {
+  @override
+  _SignInPageState createState() => _SignInPageState();
+}
 
-class SignInPage extends StatelessWidget {
+class _SignInPageState extends State<SignInPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  checkLoginAndPassword() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String log = prefs.getString('login');
+    String pass = prefs.getString('password');
+
+    if ((log == emailController.text) && (pass == passwordController.text)) {
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => NotesPage()));
+    } else {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => RegistrationPage()));
+    }
+    emailController.clear();
+    passwordController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+    double myHight = SizeConfig.safeBlockHorizontal;
+    double myWidth = SizeConfig.safeBlockVertical;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -16,96 +45,80 @@ class SignInPage extends StatelessWidget {
         elevation: 2.0,
       ),
       body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage("https://cdn.dribbble.com/users/2229974/screenshots/14431740/media/78dc80935b25bcb3dbb2302883f94c63.png"),
-              fit: BoxFit.cover,
-            ),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(
+                "https://cdn.dribbble.com/users/2229974/screenshots/14431740/media/78dc80935b25bcb3dbb2302883f94c63.png"),
+            fit: BoxFit.cover,
           ),
-          child: _buildContent()),
-      backgroundColor: Colors.grey[200],
-    );
-  }
-
-  Widget _buildContent() {
-    return Padding(
-      padding: EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Text(
-            'Sign in',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 32.0,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          SizedBox(height: 20.0),
-          TextField(
-            decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10.0),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Text(
+                'Sign in',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: myHight * 10,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              SizedBox(height: myHight * 5),
+              MyTextFild(
+                myHight: myHight,
+                myHintText: 'Login',
+                myFillColor: Colors.yellow,
+                myController: emailController,
+              ),
+              SizedBox(height: myHight * 5),
+              MyTextFild(
+                myHight: myHight,
+                myHintText: 'Password',
+                myFillColor: Colors.yellow,
+                myController: passwordController,
+              ),
+              SizedBox(height: myHight * 1.47),
+              Padding(
+                padding: const EdgeInsets.all(25.0),
+                child: SizedBox(
+                  width: myWidth * 18,
+                  height: myHight * 16,
+                  child: MyRaisedButton(
+                      myWidth: myWidth,
+                      myHight: myHight,
+                      myFunction: checkLoginAndPassword,
+                      myColor: Colors.blueGrey,
+                      textString: 'Войти'),
+                ),
+              ),
+              SizedBox(height: myHight * 2),
+              Padding(
+                padding: const EdgeInsets.all(25.0),
+                child: SizedBox(
+                  width: myWidth * 18,
+                  height: myHight * 16,
+                  child: MyRaisedButton(
+                    myWidth: myWidth,
+                    myHight: myHight,
+                    myFunction: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RegistrationPage()));
+                    },
+                    myColor: Colors.orange,
+                    textString: 'Регистрация',
                   ),
                 ),
-                filled: true,
-                hintStyle: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-                hintText: 'Login',
-                fillColor: Colors.yellow),
-          ),
-          SizedBox(height: 20.0),
-          TextField(
-            decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10.0),
-                  ),
-                ),
-                filled: true,
-                hintStyle: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-                hintText: 'Password',
-                fillColor: Colors.yellow),
-          ),
-          SizedBox(height: 10.0),
-          Padding(
-            padding: const EdgeInsets.all(25.0),
-            child: SizedBox(
-              width: 50.0,
-              height: 50.0,
-              child: RaisedButton(
-                onPressed: () {},
-                color: Colors.blueGrey,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.black)
-                ),
-                child: Padding(padding: EdgeInsets.only(right: 200),
-                    child: Text('Войти', style: TextStyle(fontSize: 30))),
               ),
-            ),
+            ],
           ),
-          SizedBox(height: 8.0),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: SizedBox(
-              width: 50.0,
-              height: 50.0,
-              child: RaisedButton(
-                onPressed: () {},
-                color: Colors.orange,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.black)
-                ),
-                child: Padding(padding: EdgeInsets.only(right: 10),
-                    child: Text('Новый пользователь', style: TextStyle(fontSize: 30))),
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
+      // backgroundColor: Colors.grey[200],
     );
   }
 }
