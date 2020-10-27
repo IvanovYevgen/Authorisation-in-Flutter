@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:test_app_rf/common_widgets/text_fild.dart';
 import 'package:test_app_rf/screens/registration_page.dart';
+import 'package:test_app_rf/service_size/size_config.dart';
 import '../common_widgets/my_raised_button.dart';
-import '../size_config.dart';
-import '../text_fild.dart';
 import 'notes.dart';
 
 class SignInPage extends StatefulWidget {

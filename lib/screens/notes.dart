@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sliver_tools/sliver_tools.dart';
+import 'package:test_app_rf/common_widgets/text_fild.dart';
+import 'package:test_app_rf/service_size/size_config.dart';
 
-import '../size_config.dart';
-import '../text_fild.dart';
 
 class NotesPage extends StatefulWidget {
   @override

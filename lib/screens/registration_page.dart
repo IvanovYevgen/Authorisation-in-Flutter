@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../common_widgets/my_raised_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../size_config.dart';
-import '../text_fild.dart';
+import 'package:test_app_rf/common_widgets/text_fild.dart';
+import 'package:test_app_rf/service_size/size_config.dart';
+import '../common_widgets/my_raised_button.dart';
 import 'notes.dart';
-// import 'notes.dart';
+
 
 class RegistrationPage extends StatefulWidget {
   @override
