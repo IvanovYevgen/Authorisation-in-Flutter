@@ -45,7 +45,9 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "dev-assets/app.png"
+  image_path: "dev_assets/app.png"
+  adaptive_icon_backgroung: "#191919"
+  adaptive_icon_foregroung: "dev_assets/app-adaptive.png"
 
 
 

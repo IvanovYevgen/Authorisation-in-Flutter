@@ -3,6 +3,7 @@
 *.moved-aside
 *.pbxuser
 *.perspectivev3
+**/android/key.properties
 **/*sync/
 .sconsign.dblite
 .tags*
